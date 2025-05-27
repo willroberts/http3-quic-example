@@ -1,4 +1,4 @@
-module github.com/willroberts/http3-quic
+module github.com/willroberts/http3-quic-example
 
 go 1.24.3
 
