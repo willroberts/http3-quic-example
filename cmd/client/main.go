@@ -17,8 +17,7 @@ func main() {
 	defer tr.Close()
 	client := &http.Client{Transport: tr}
 
-	resp, err := client.Get("https://nghttp2.org:4433")
-	//resp, err := client.Get("https://127.0.0.1:8000/")
+	resp, err := client.Get("https://127.0.0.1:8000/")
 	if err != nil {
 		log.Fatal(err)
 	}
