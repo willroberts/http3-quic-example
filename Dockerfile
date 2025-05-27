@@ -1,0 +1,5 @@
+FROM nginx:1.27
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+RUN mkdir /etc/nginx/certs
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj "/C=US/ST=XX/L=XX/O=XX/CN=www.example.local" -keyout /etc/nginx/certs/nginx.key -out /etc/nginx/certs/nginx.crt
