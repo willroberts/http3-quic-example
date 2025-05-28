@@ -1,8 +1,12 @@
-FROM docker.io/denji/nginx-boringssl:stable-armv7-alpine
-
-COPY nginx/nginx.conf /etc/nginx/nginx.conf
-COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+FROM golang:1.24-alpine
 
 RUN apk add openssl
-RUN mkdir /etc/nginx/certs
-RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj "/C=US/ST=XX/L=XX/O=XX/CN=www.example.local" -keyout /etc/nginx/certs/nginx.key -out /etc/nginx/certs/nginx.crt
+RUN mkdir /etc/certs
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj "/C=US/ST=XX/L=XX/O=XX/CN=www.example.local" -keyout /etc/certs/ssl.key -out /etc/certs/ssl.crt
+
+RUN mkdir /app
+COPY . /app
+WORKDIR /app
+RUN go mod tidy
+
+ENTRYPOINT go run cmd/server/main.go

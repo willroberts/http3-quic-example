@@ -21,5 +21,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Println(resp.StatusCode, resp.Proto)
+	log.Println("Response:", resp.StatusCode, resp.Proto)
+	log.Println("Headers:", resp.Header)
 }
